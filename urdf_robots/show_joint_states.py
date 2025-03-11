@@ -9,7 +9,6 @@ from rclpy.qos import qos_profile_sensor_data
 from rclpy.duration import Duration
 import matplotlib.pyplot as plt
 
-
 class ShowJointStates(Node):
     def __init__(self):
         super().__init__('show_joint_states')

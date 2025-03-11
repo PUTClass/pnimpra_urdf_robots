@@ -43,22 +43,12 @@ class SampleJointStates(Node):
             self.get_logger().info(info)
         
         
-        msg = JointState()
-        for joint_name, limit in zip(movable_joints, limits):
-            msg.name.append(joint_name)
-            msg.position.append(limit.lower)
-        counter = 0.0
-        rate = self.create_rate(50)
-        while rclpy.ok():
-            counter += 0.1
-
-            msg.position[0] = (limits[0].upper-limits[0].lower)*(np.sin(counter/3)+1)/2+limits[0].lower
-            msg.position[1] = (limits[1].upper-limits[1].lower)*(np.sin(counter/5)+1)/2+limits[1].lower
-            msg.position[2] = (limits[2].upper-limits[2].lower)*(np.sin(counter/7)+1)/2+limits[2].lower
-
-            msg.header.stamp = self.get_clock().now().to_msg()
-            self.publisher_.publish(msg)
-            rate.sleep()
+        ### Execute the sequence of moves here.
+        ### Start with creating a message JointState and fill it out with positions and joint names.
+        ### Define a custom trajectory of joint positions. 
+        ### Keep the positions within the boundaries -> np.clip(position, lower_limit, upper_limit)
+        ### You can use self.get_clock().now() to make the moves time-dependent.
+        
 
 
 def main(args=None):
